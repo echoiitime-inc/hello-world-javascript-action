@@ -17,9 +17,7 @@ runs:
       if: ${{inputs.who-to-greet == 'echoiitime-javascript' }}
       run: dist/index.js
       shell: node
-      working-directory: .
     - name: node test
       id: baseline-test 
       uses: ./.github/workflows/node_test.yml
-      working-directory: .
       
