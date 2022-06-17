@@ -12,9 +12,14 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: check-github-token 
+    - name: check github token 
+      id: check-github-token 
+      if: ${{inputs.who-to-greet == 'echoiitime-javascript' }}
       run: dist/index.js
-      shell: node16
-    - id: baseline-test 
+      shell: node
+      working-directory: .
+    - name: node test
+      id: baseline-test 
       uses: ./.github/workflows/node_test.yml
+      working-directory: .
       
