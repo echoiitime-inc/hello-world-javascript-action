@@ -20,7 +20,7 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: node test
-      id: baseline-test 
-      uses: .github/workflows/node_test.yml
+      id: node_test
+      uses: ./.github/workflows/node_test.yml
       
     
