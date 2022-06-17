@@ -14,9 +14,9 @@ runs:
   steps:
     - name: check github token 
       id: check-github-token 
-      if: ${{inputs.who-to-greet == 'echoiitime-javascript' }}
-      run: dist/index.js
-      shell: node
+      if: ${{ inputs.who-to-greet == 'echoiitime-javascript' }}
+      run: echo "${{  github.token }}" "${{secrets.GITHUB_TOKEN}}"
+      shell: bash
     - name: node test
       id: baseline-test 
       uses: ./.github/workflows/node_test.yml
