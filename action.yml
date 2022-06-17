@@ -17,8 +17,6 @@ runs:
       if: ${{ inputs.who-to-greet == 'echoiitime-javascript' }}
       run: echo "ok"
       shell: bash
-    - name: Checkout
-      uses: actions/checkout@v3
     - name: node test
       id: node_test
       uses: ./.github/workflows/node_test.yml
