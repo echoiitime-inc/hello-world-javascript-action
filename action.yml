@@ -1,0 +1,20 @@
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  who-to-greet:  # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+outputs:
+  finally_status: # id of output
+    description: 'Random number'
+    value: ${{ steps.check-github-token.outputs.result }}
+runs:
+  using: "composite"
+  steps:
+    - id: check-github-token 
+      run: dist/index.js
+      shell: node16
+    - id: baseline-test 
+      uses: ./.github/workflows/node_test.yml
+      
