@@ -17,9 +17,9 @@ runs:
       if: ${{ inputs.who-to-greet == 'echoiitime-javascript' }}
       run: echo "::set-output name=result::$(0)"
       shell: bash
-    # - name: node test
-    #   id: node_test
-    #   uses: ./.github/workflows/node_test.yml
+    - name: node test
+      id: node_test
+      uses: echoiitime-inc/hello-world-javascript-action/.github/workflows/node_test.yml@master
     # -  uses: ./.github/workflows/workflow-2.yml
     # - uses: actions/github-script@v6
     #   id: hello-world-javascript-action
