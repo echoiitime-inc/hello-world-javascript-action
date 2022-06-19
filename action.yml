@@ -15,25 +15,25 @@ runs:
     - name: check github token 
       id: check-github-token 
       if: ${{ inputs.who-to-greet == 'echoiitime-javascript' }}
-      run: echo "ok"
+      run: echo "::set-output name=result::$(0)"
       shell: bash
     # - name: node test
     #   id: node_test
     #   uses: ./.github/workflows/node_test.yml
     # -  uses: ./.github/workflows/workflow-2.yml
-    - uses: actions/github-script@v6
-      id: hello-world-javascript-action
-      with:
-          github-token: ${{ secrets.ORG_ACCESS_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'echoiitime-inc',
-              repo: 'hello-world-javascript-action',
-              workflow_id: 'node_test.yml',
-              ref: 'master'
-            })
-    - name: Get hello-world-javascript-action the output
-      run: echo "The time was ${{ steps.hello-world-javascript-action.outputs.result }}"
-      shell: bash
+    # - uses: actions/github-script@v6
+    #   id: hello-world-javascript-action
+    #   with:
+    #       github-token: ${{ secrets.ORG_ACCESS_TOKEN }}
+    #       script: |
+    #         await github.rest.actions.createWorkflowDispatch({
+    #           owner: 'echoiitime-inc',
+    #           repo: 'hello-world-javascript-action',
+    #           workflow_id: 'node_test.yml',
+    #           ref: 'master'
+    #         })
+    # - name: Get hello-world-javascript-action the output
+    #   run: echo "The time was ${{ steps.hello-world-javascript-action.outputs.result }}"
+    #   shell: bash
       
     
