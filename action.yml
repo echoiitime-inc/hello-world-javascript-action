@@ -24,7 +24,7 @@ runs:
     - uses: actions/github-script@v6
       id: hello-world-javascript-action
       with:
-          github-token: ${{ secrets.ACCESS_TOKEN }}
+          github-token: ${{ secrets.ORG_ACCESS_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: 'echoiitime-inc',
