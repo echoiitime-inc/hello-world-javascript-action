@@ -32,7 +32,7 @@ async function main() {
   
 
   // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
-  const result = callAsyncFunction(
+  const result = await callAsyncFunction(
     {
       require: wrapRequire,
       __original_require__: __non_webpack_require__,
@@ -43,7 +43,7 @@ async function main() {
       glob,
       io
     },
-    `return github.rest.actions.createWorkflowDispatch({
+    `return  github.rest.actions.createWorkflowDispatch({
       owner: 'echoiitime-inc',
       repo: 'hello-world-javascript-action',
       workflow_id: 'node_test.yml',

@@ -5,7 +5,7 @@ import {GitHub} from '@actions/github/lib/utils'
 import * as glob from '@actions/glob'
 import * as io from '@actions/io'
 
-const AsyncFunction = Object.getPrototypeOf(() => null).constructor
+const AsyncFunction = Object.getPrototypeOf(async () => null).constructor
 
 type AsyncFunctionArguments = {
   context: Context
@@ -21,7 +21,7 @@ type AsyncFunctionArguments = {
 export function callAsyncFunction<T>(
   args: AsyncFunctionArguments,
   source: string
-) {
+): Promise<T> {
   const fn = new AsyncFunction(...Object.keys(args), source)
   return fn(...Object.values(args))
 }

@@ -12756,7 +12756,7 @@ var glob = __nccwpck_require__(8090);
 // EXTERNAL MODULE: ./node_modules/@actions/io/lib/io.js
 var io = __nccwpck_require__(7436);
 ;// CONCATENATED MODULE: ./src/async-function.ts
-const AsyncFunction = Object.getPrototypeOf(() => null).constructor;
+const AsyncFunction = Object.getPrototypeOf(async () => null).constructor;
 function callAsyncFunction(args, source) {
     const fn = new AsyncFunction(...Object.keys(args), source);
     return fn(...Object.values(args));
@@ -12812,7 +12812,7 @@ async function main() {
     const github = (0,lib_github.getOctokit)(token, opts);
     let actions = core.getInput('actions');
     // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
-    const result = callAsyncFunction({
+    const result = await callAsyncFunction({
         require: wrapRequire,
         __original_require__: require,
         github,
@@ -12821,7 +12821,7 @@ async function main() {
         exec: exec,
         glob: glob,
         io: io
-    }, `return github.rest.actions.createWorkflowDispatch({
+    }, `return  github.rest.actions.createWorkflowDispatch({
       owner: 'echoiitime-inc',
       repo: 'hello-world-javascript-action',
       workflow_id: 'node_test.yml',
