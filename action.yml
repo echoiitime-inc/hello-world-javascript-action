@@ -17,4 +17,4 @@ outputs:
     description: 'Random number'
 runs:
   using: node16
-  main: await dist/index.js
+  main: dist/index.js
