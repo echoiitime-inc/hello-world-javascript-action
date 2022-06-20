@@ -28,4 +28,4 @@ runs:
       uses: actions/checkout@v3
     - name: test
       id: github_test
-      uses: ./github/workflows/nodeTest/action.yml@master
+      uses: ./.github/workflows/nodeTest/action.yml@master
