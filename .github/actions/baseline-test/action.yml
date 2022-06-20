@@ -39,6 +39,10 @@ runs:
           ref: refs/heads/master
           path: hubble
           lfs: true
+      - name: ansible check with ubuntu:latest
+        uses: roles-ansible/check-ansible-ubuntu-latest-action@master
+        with:
+          targets: "./"
 
       - name: mk logs folder
         env:

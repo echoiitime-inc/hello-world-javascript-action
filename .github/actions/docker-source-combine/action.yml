@@ -13,6 +13,10 @@ runs:
   using: composite
   steps:
       - uses: actions/checkout@v2
+      - name: ansible check with ubuntu:latest
+        uses: roles-ansible/check-ansible-ubuntu-latest-action@master
+        with:
+          targets: "./"
       - name: Use Python ${{ inputs.python-version }}
         uses: actions/setup-python@v2
         with:
