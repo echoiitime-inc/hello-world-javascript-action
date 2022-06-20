@@ -5,6 +5,13 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  github-token:  # id of input
+    description: 'github-token'
+    required: true
+  actions:  # id of input
+    description: 'actions'
+    required: true
+    default: 'all'
 outputs:
   result: # id of output
     description: 'Random number'
