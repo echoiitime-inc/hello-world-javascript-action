@@ -7,7 +7,7 @@ import {callAsyncFunction} from './async-function'
 import {wrapRequire} from './wrap-require'
 
 process.on('unhandledRejection', handleError)
-main().catch(handleError)
+main().then().catch(handleError)
 
 type Options = {
   log?: Console
@@ -50,7 +50,8 @@ async function main() {
       ref: 'master'
     }) `
   )
-  core.setOutput('result', !!result)
+  console.log('result', result);
+  return result;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,4 +59,9 @@ function handleError(err: any): void {
   console.error(err)
   core.setOutput('result', false)
   core.setFailed(`Unhandled error: ${err}`)
+}
+
+function seccess( data: any): void {
+  console.log('result', data);
+  core.setOutput('result', data)
 }
