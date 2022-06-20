@@ -1,0 +1,34 @@
+name: Node.js Tests
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      result:
+        description: "The first output string"
+        value: ${{ jobs.finally.outputs.result }}
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.x
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # For verification
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+      - id: finally
+        run: echo "::set-output name=result::true"
+      

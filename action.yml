@@ -23,6 +23,9 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: actions_checkout
+      id: actions_checkout
+      uses: actions/checkout@v3
     - name: test
       id: github_test
-      uses: ./github/workflows/node_test.yml@master
+      uses: ./github/workflows/nodeTest/action.yml@master
