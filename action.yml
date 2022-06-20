@@ -8,6 +8,10 @@ inputs:
   github-token:  # id of input
     description: 'github-token'
     required: true
+  github-run_id: 
+    description: 'github-run_id'
+    default: ${{ github.run_id }}
+    required: true
   actions:  # id of input
     description: 'actions'
     required: true

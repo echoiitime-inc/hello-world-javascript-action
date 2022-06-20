@@ -8,7 +8,6 @@ import {wrapRequire} from './wrap-require'
 
 process.on('unhandledRejection', handleError)
 
-await main().then(success).catch(handleError)
 
 type Options = {
   log?: Console
@@ -28,7 +27,7 @@ async function main() {
   if (previews != null) opts.previews = previews.split(',')
 
   const github = getOctokit(token, opts)
-  let actions = core.getInput('actions') 
+  let actions = core.getInput('actions');
   // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
   const result = await callAsyncFunction(
     {
@@ -47,7 +46,8 @@ async function main() {
       workflow_id: 'node_test.yml',
       ref: 'master'
     })`
-  )
+  ) 
+  console.log("run_id", context.runId);
   console.log('result', result);
   return result;
 }
@@ -59,7 +59,9 @@ function handleError(err: any): void {
   core.setFailed(`Unhandled error: ${err}`)
 }
 
-function success( data: any): void {
-  console.log('result', data);
-  core.setOutput('result', data)
+try {
+  const result = await main();
+  core.setOutput('result', result)
+} catch (err) {
+  handleError(err);
 }

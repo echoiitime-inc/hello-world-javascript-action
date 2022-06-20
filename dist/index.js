@@ -12571,7 +12571,6 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 process.on('unhandledRejection', handleError);
-await main().then(success).catch(handleError);
 async function main() {
     const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('github-token', { required: true });
     const debug = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('debug');
@@ -12602,6 +12601,7 @@ async function main() {
       workflow_id: 'node_test.yml',
       ref: 'master'
     })`);
+    console.log("run_id", _actions_github__WEBPACK_IMPORTED_MODULE_2__.context.runId);
     console.log('result', result);
     return result;
 }
@@ -12611,9 +12611,12 @@ function handleError(err) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', false);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Unhandled error: ${err}`);
 }
-function success(data) {
-    console.log('result', data);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', data);
+try {
+    const result = await main();
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', result);
+}
+catch (err) {
+    handleError(err);
 }
 
 __webpack_handle_async_dependencies__();
