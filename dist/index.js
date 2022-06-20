@@ -12583,14 +12583,14 @@ async function main() {
         opts.userAgent = userAgent;
     if (previews != null)
         opts.previews = previews.split(',');
-    const github = (0,_actions_github__WEBPACK_IMPORTED_MODULE_2__.getOctokit)(token, opts);
+    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_2___default().getOctokit(token, opts);
     let actions = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('actions');
     // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
     const result = await (0,_async_function__WEBPACK_IMPORTED_MODULE_5__/* .callAsyncFunction */ .X)({
         require: _wrap_require__WEBPACK_IMPORTED_MODULE_6__/* .wrapRequire */ .N,
         __original_require__: require,
-        github,
-        context: _actions_github__WEBPACK_IMPORTED_MODULE_2__.context,
+        github: octokit,
+        context: (_actions_github__WEBPACK_IMPORTED_MODULE_2___default().context),
         core: _actions_core__WEBPACK_IMPORTED_MODULE_0__,
         exec: _actions_exec__WEBPACK_IMPORTED_MODULE_1__,
         glob: _actions_glob__WEBPACK_IMPORTED_MODULE_3__,
@@ -12601,7 +12601,7 @@ async function main() {
       workflow_id: 'node_test.yml',
       ref: 'master'
     })`);
-    console.log("run_id", _actions_github__WEBPACK_IMPORTED_MODULE_2__.context.runId);
+    console.log("run_id", (_actions_github__WEBPACK_IMPORTED_MODULE_2___default().context.runId));
     console.log('result', result);
     return result;
 }

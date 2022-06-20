@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import {context, getOctokit} from '@actions/github'
+import github from '@actions/github'
 import * as glob from '@actions/glob'
 import * as io from '@actions/io'
 import {callAsyncFunction} from './async-function'
@@ -26,15 +26,15 @@ async function main() {
   if (userAgent != null) opts.userAgent = userAgent
   if (previews != null) opts.previews = previews.split(',')
 
-  const github = getOctokit(token, opts)
+  const octokit = github.getOctokit(token, opts)
   let actions = core.getInput('actions');
   // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
   const result = await callAsyncFunction(
     {
       require: wrapRequire,
       __original_require__: __non_webpack_require__,
-      github,
-      context,
+      github: octokit,
+      context: github.context,
       core,
       exec,
       glob,
@@ -47,7 +47,7 @@ async function main() {
       ref: 'master'
     })`
   ) 
-  console.log("run_id", context.runId);
+  console.log("run_id", github.context.runId);
   console.log('result', result);
   return result;
 }
