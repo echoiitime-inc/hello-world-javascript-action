@@ -23,12 +23,12 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: /.github/actions/baseline-test
+    - uses: ./.github/actions/baseline-test
       with: 
         node-version: '16.x'
         python-version: '3.7'
         case-path: "success/case1"
-    - uses: /.github/actions/docker-source-combine
+    - uses: ./.github/actions/docker-source-combine
       with: 
         python-version: '3.7'
     - uses: /.github/workflows/node_test.yml
