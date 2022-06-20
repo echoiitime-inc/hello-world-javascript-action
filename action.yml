@@ -15,15 +15,9 @@ inputs:
 outputs:
   result: # id of output
     description: 'Random number'
-    value: ${{ steps.check-github-token.outputs.result }}
 runs:
-  using: "composite"
-  steps:
-    - name: check github token 
-      id: check-github-token 
-      if: ${{ inputs.who-to-greet == 'echoiitime-javascript' }}
-      run: echo "::set-output name=result::$(0)"
-      shell: bash
+  using: 'node16'
+  main: 'dist/index.js
     # - name: node test
     #   id: node_test
     #   uses: echoiitime-inc/hello-world-javascript-action/.github/workflows/node_test.yml@master
