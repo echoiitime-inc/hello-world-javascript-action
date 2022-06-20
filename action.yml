@@ -16,25 +16,5 @@ outputs:
   result: # id of output
     description: 'Random number'
 runs:
-  using: 'node16'
-  main: 'dist/index.js
-    # - name: node test
-    #   id: node_test
-    #   uses: echoiitime-inc/hello-world-javascript-action/.github/workflows/node_test.yml@master
-    # -  uses: ./.github/workflows/workflow-2.yml
-    # - uses: actions/github-script@v6
-    #   id: hello-world-javascript-action
-    #   with:
-    #       github-token: ${{ secrets.ORG_ACCESS_TOKEN }}
-    #       script: |
-    #         await github.rest.actions.createWorkflowDispatch({
-    #           owner: 'echoiitime-inc',
-    #           repo: 'hello-world-javascript-action',
-    #           workflow_id: 'node_test.yml',
-    #           ref: 'master'
-    #         })
-    # - name: Get hello-world-javascript-action the output
-    #   run: echo "The time was ${{ steps.hello-world-javascript-action.outputs.result }}"
-    #   shell: bash
-      
-    
+  using: node16
+  main: dist/index.js
