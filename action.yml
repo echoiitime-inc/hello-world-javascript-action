@@ -19,6 +19,10 @@ inputs:
 outputs:
   result: # id of output
     description: 'Random number'
+    value: ${{ steps.github_test.outputs.result }}
 runs:
-  using: node16
-  main: dist/index.js
+  using: composite
+  steps:
+    - name: test
+      id: github_test
+      uses: ./github/workflows/node_test.yml@master
