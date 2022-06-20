@@ -8822,6 +8822,78 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 6144:
+/***/ ((module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+__nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5438);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
+
+
+process.on('unhandledRejection', handleError);
+await main().then(success).catch(handleError);
+async function main() {
+    const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('github-token', { required: true });
+    const debug = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('debug');
+    const userAgent = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('user-agent');
+    const previews = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('previews');
+    const opts = {};
+    if (debug === 'true')
+        opts.log = console;
+    if (userAgent != null)
+        opts.userAgent = userAgent;
+    if (previews != null)
+        opts.previews = previews.split(',');
+    const github = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)(token, opts);
+    let actions = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('actions');
+    const result = await github.rest.actions.createWorkflowDispatch({
+        owner: 'echoiitime-inc',
+        repo: 'hello-world-javascript-action',
+        workflow_id: 'node_test.yml',
+        ref: 'master'
+    });
+    // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
+    // const result = await callAsyncFunction(
+    //   {
+    //     require: wrapRequire,
+    //     __original_require__: __non_webpack_require__,
+    //     github,
+    //     context,
+    //     core,
+    //     exec,
+    //     glob,
+    //     io
+    //   },
+    //   `return  await github.rest.actions.createWorkflowDispatch({
+    //     owner: 'echoiitime-inc',
+    //     repo: 'hello-world-javascript-action',
+    //     workflow_id: 'node_test.yml',
+    //     ref: 'master'
+    //   })`
+    // )
+    console.log('result', result);
+    return result;
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleError(err) {
+    console.error(err);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', false);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Unhandled error: ${err}`);
+}
+function success(data) {
+    console.log('result', data);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', data);
+}
+
+__webpack_handle_async_dependencies__();
+}, 1);
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -8983,6 +9055,80 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackThen = typeof Symbol === "function" ? Symbol("webpack then") : "__webpack_then__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var completeQueue = (queue) => {
+/******/ 			if(queue) {
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var completeFunction = (fn) => (!--fn.r && fn());
+/******/ 		var queueFunction = (queue, fn) => (queue ? queue.push(fn) : completeFunction(fn));
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackThen]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						completeQueue(queue);
+/******/ 						queue = 0;
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 												obj[webpackThen] = (fn, reject) => (queueFunction(queue, fn), dep['catch'](reject));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 								ret[webpackThen] = (fn) => (completeFunction(fn));
+/******/ 								ret[webpackExports] = dep;
+/******/ 								return ret;
+/******/ 		}));
+/******/ 		__nccwpck_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue = hasAwait && [];
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var isEvaluating = true;
+/******/ 			var nested = false;
+/******/ 			var whenAll = (deps, onResolve, onReject) => {
+/******/ 				if (nested) return;
+/******/ 				nested = true;
+/******/ 				onResolve.r += deps.length;
+/******/ 				deps.map((dep, i) => (dep[webpackThen](onResolve, onReject)));
+/******/ 				nested = false;
+/******/ 			};
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = () => (resolve(exports), completeQueue(queue), queue = 0);
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackThen] = (fn, rejectFn) => {
+/******/ 				if (isEvaluating) { return completeFunction(fn); }
+/******/ 				if (currentDeps) whenAll(currentDeps, fn, rejectFn);
+/******/ 				queueFunction(queue, fn);
+/******/ 				promise['catch'](rejectFn);
+/******/ 			};
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				if(!deps) return outerResolve();
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn, result;
+/******/ 				var promise = new Promise((resolve, reject) => {
+/******/ 					fn = () => (resolve(result = currentDeps.map((d) => (d[webpackExports]))));
+/******/ 					fn.r = 0;
+/******/ 					whenAll(currentDeps, fn, reject);
+/******/ 				});
+/******/ 				return fn.r ? promise : result;
+/******/ 			}).then(outerResolve, reject);
+/******/ 			isEvaluating = false;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -9028,74 +9174,12 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5438);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_1__);
-
-
-process.on('unhandledRejection', handleError);
-main().then(success).catch(handleError);
-async function main() {
-    const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('github-token', { required: true });
-    const debug = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('debug');
-    const userAgent = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('user-agent');
-    const previews = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('previews');
-    const opts = {};
-    if (debug === 'true')
-        opts.log = console;
-    if (userAgent != null)
-        opts.userAgent = userAgent;
-    if (previews != null)
-        opts.previews = previews.split(',');
-    const github = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)(token, opts);
-    let actions = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('actions');
-    const result = await github.rest.actions.createWorkflowDispatch({
-        owner: 'echoiitime-inc',
-        repo: 'hello-world-javascript-action',
-        workflow_id: 'node_test.yml',
-        ref: 'master'
-    });
-    // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
-    // const result = await callAsyncFunction(
-    //   {
-    //     require: wrapRequire,
-    //     __original_require__: __non_webpack_require__,
-    //     github,
-    //     context,
-    //     core,
-    //     exec,
-    //     glob,
-    //     io
-    //   },
-    //   `return  await github.rest.actions.createWorkflowDispatch({
-    //     owner: 'echoiitime-inc',
-    //     repo: 'hello-world-javascript-action',
-    //     workflow_id: 'node_test.yml',
-    //     ref: 'master'
-    //   })`
-    // )
-    console.log('result', result);
-    return result;
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function handleError(err) {
-    console.error(err);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', false);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Unhandled error: ${err}`);
-}
-function success(data) {
-    console.log('result', data);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('result', data);
-}
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module used 'module' so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(6144);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;

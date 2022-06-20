@@ -7,7 +7,8 @@ import {callAsyncFunction} from './async-function'
 import {wrapRequire} from './wrap-require'
 
 process.on('unhandledRejection', handleError)
-main().then(success).catch(handleError)
+
+await main().then(success).catch(handleError)
 
 type Options = {
   log?: Console
