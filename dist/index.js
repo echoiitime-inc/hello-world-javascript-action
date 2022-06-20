@@ -12796,7 +12796,7 @@ const wrapRequire = new Proxy(require, {
 
 
 process.on('unhandledRejection', handleError);
-main().catch(handleError);
+main().then(success).catch(handleError);
 async function main() {
     const token = core.getInput('github-token', { required: true });
     const debug = core.getInput('debug');
@@ -12827,13 +12827,18 @@ async function main() {
       workflow_id: 'node_test.yml',
       ref: 'master'
     }) `);
-    core.setOutput('result', !!result);
+    console.log('result', result);
+    return result;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(err) {
     console.error(err);
     core.setOutput('result', false);
     core.setFailed(`Unhandled error: ${err}`);
+}
+function success(data) {
+    console.log('result', data);
+    core.setOutput('result', data);
 }
 
 })();

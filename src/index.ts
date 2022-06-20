@@ -7,7 +7,7 @@ import {callAsyncFunction} from './async-function'
 import {wrapRequire} from './wrap-require'
 
 process.on('unhandledRejection', handleError)
-main().then().catch(handleError)
+main().then(success).catch(handleError)
 
 type Options = {
   log?: Console
@@ -61,7 +61,7 @@ function handleError(err: any): void {
   core.setFailed(`Unhandled error: ${err}`)
 }
 
-function seccess( data: any): void {
+function success( data: any): void {
   console.log('result', data);
   core.setOutput('result', data)
 }
