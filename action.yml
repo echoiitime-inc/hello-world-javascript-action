@@ -11,7 +11,7 @@ inputs:
   actions:  # id of input
     description: 'actions'
     required: true
-    default: 'all'
+    default:  ''
 outputs:
   result: # id of output
     description: 'Random number'

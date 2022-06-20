@@ -43,12 +43,12 @@ async function main() {
       glob,
       io
     },
-    `return  github.rest.actions.createWorkflowDispatch({
+    `return  await github.rest.actions.createWorkflowDispatch({
       owner: 'echoiitime-inc',
       repo: 'hello-world-javascript-action',
       workflow_id: 'node_test.yml',
       ref: 'master'
-    }) `
+    })`
   )
   console.log('result', result);
   return result;
