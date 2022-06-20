@@ -19,13 +19,16 @@ inputs:
 outputs:
   result: # id of output
     description: 'Random number'
-    value: ${{ steps.github_test.outputs.result }}
+    value: '0'
 runs:
   using: composite
   steps:
-    - name: actions_checkout
-      id: actions_checkout
-      uses: actions/checkout@v3
-    - name: test
-      id: github_test
-      uses: ./.github/workflows/nodeTest/action.yml@master
+    - uses: ./.github/actions/baseline-test
+      with: 
+        node-version: '16.x'
+        python-version: '3.7'
+        case-path: "success/case1"
+    - uses: ./.github/actions/docker-source-combine
+      with: 
+        python-version: '3.7'
+        
