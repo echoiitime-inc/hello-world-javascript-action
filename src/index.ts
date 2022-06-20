@@ -29,24 +29,30 @@ async function main() {
   const github = getOctokit(token, opts)
   let actions = core.getInput('actions');
   // Using property/value shorthand on `require` (e.g. `{require}`) causes compilation errors.
-  const result = await callAsyncFunction(
-    {
-      require: wrapRequire,
-      __original_require__: __non_webpack_require__,
-      github,
-      context,
-      core,
-      exec,
-      glob,
-      io
-    },
-    `return await github.rest.actions.createWorkflowDispatch({
-      owner: 'echoiitime-inc',
-      repo: 'hello-world-javascript-action',
-      workflow_id: 'node_test.yml',
-      ref: 'master'
-    })`
-  ) 
+  // const result = await callAsyncFunction(
+  //   {
+  //     require: wrapRequire,
+  //     __original_require__: __non_webpack_require__,
+  //     github,
+  //     context,
+  //     core,
+  //     exec,
+  //     glob,
+  //     io
+  //   },
+  //   `return await github.rest.actions.createWorkflowDispatch({
+  //     owner: 'echoiitime-inc',
+  //     repo: 'hello-world-javascript-action',
+  //     workflow_id: 'node_test.yml',
+  //     ref: 'master'
+  //   })`
+  // ) 
+  const result = await github.rest.actions.createWorkflowDispatch({
+    owner: 'echoiitime-inc',
+    repo: 'hello-world-javascript-action',
+    workflow_id: 'node_test.yml',
+    ref: 'master'
+  });
   console.log("run_id", context.runId);
   console.log('result', result);
   return result;
