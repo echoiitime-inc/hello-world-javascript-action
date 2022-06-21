@@ -19,7 +19,7 @@ runs:
       uses: Codex-/await-local-workflow-run@v1.1.0
       with:
         token: ${{ inputs.github-token }} # The standard action GitHub token should be enough to poll the local workflows.
-        workflow: node_test.yml # filename of the workflow you wish to await
+        workflow: ./.github/workflows/node_test.yml # filename of the workflow you wish to await
         check_name: master # Optional
         timeout_mins: 5 # Default: 15
         poll_interval_ms: 10000 # Default: 15000
