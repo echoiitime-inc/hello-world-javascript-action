@@ -15,12 +15,17 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Await the completion of node_test
-      uses: Codex-/await-local-workflow-run@v1.1.0
+    - name: Dispatch an action and get the run ID
+      uses: codex-/return-dispatch@v1
+      id: return_dispatch
       with:
-        token: ${{ inputs.github-token }} # The standard action GitHub token should be enough to poll the local workflows.
-        workflow: ./.github/workflows/node_test.yml # filename of the workflow you wish to await
-        check_name: master # Optional
-        timeout_mins: 5 # Default: 15
-        poll_interval_ms: 10000 # Default: 15000
+        token: ${{ inputs.github-token }} # Note this is NOT GITHUB_TOKEN but a PAT
+        ref: refs/heads/master # or refs/heads/target_branch
+        repo: hello-world-javascript-action
+        owner: echoiitime-inc
+        workflow: node_test.yml
+        workflow_timeout_seconds:  300 # Default: 300
+    - uses: ./.github/actions/baseline-test
+    
+    
         
