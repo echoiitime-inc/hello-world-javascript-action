@@ -18,13 +18,6 @@ runs:
     - name: Dispatch an action and get the run ID
       uses: codex-/return-dispatch@v1
       id: return_dispatch
-      with:
-        token: ${{ inputs.github-token }} # Note this is NOT GITHUB_TOKEN but a PAT
-        ref: refs/heads/master # or refs/heads/target_branch
-        repo: hello-world-javascript-action
-        owner: echoiitime-inc
-        workflow: node_test.yml
-        workflow_timeout_seconds:  300 # Default: 300
     - uses: ./.github/actions/baseline-test
     
     
