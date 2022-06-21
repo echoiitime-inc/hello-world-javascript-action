@@ -16,7 +16,7 @@ runs:
   using: composite
   steps:
     - name: Await the completion of node_test
-      uses: codex-/await-local-workflow-run@v1
+      uses: Codex-/await-local-workflow-run@v1.1.0
       with:
         token: ${{ inputs.github-token }} # The standard action GitHub token should be enough to poll the local workflows.
         workflow: node_test.yml # filename of the workflow you wish to await
