@@ -15,7 +15,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: ./.github/actions/baseline-test
+    - uses: echoiitime-inc/docker-source-combine@master
+    - uses: echoiitime-inc/baseline-test@master
     
     
         
